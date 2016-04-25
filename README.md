@@ -50,14 +50,13 @@ CONSIGNES
  6. Sur la page d'accueil afficher les 6 produits les plus récents
 	> **BONUS** : Afficher 2 produits aléatoires parmi les mieux notés dans la sidebar
 
- 7. Dans product.php, afficher 1 produit par rapport à son identifiant passé en paramètre
-	> **BONUS** : Afficher 3 produits associés dans la sidebar
-
- 8. Dans les listes de produits (home, search, sidebar...etc) :
+ 7. Dans les listes de produits (home, search, sidebar...etc) :
 	- N'afficher qu'un extrait de la description du produit (c.f. function cutString)
 	- Utiliser le bouton ``View`` pour faire un lien vers la page product.php en passant l'identifiant de produit en paramètre
-
 	> **BONUS** : Faire une fonction et/ou un include pour rassembler à un endroit le code HTML des blocs de produits, communs aux différentes pages``
+
+ 8. Dans product.php, afficher 1 produit par rapport à son identifiant passé en paramètre
+	> **BONUS** : Afficher 3 produits associés dans la sidebar
 
  9. Dans search.php :
 	- Réceptionner et contrôler les données du formulaire de recherche rapide en méthode GET
