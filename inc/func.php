@@ -4,6 +4,14 @@ function debug($tableau) {
 	echo '<pre>'.print_r($tableau, true).'</pre>';
 }
 
+function redirectJS($url, $delay = 1) {
+    echo '<script>
+          setTimeout(function() {
+                location.href = "'.$url.'"; }
+          , '.($delay * 1000).');
+          </script>';
+}
+
 function formatAmount($amount, $currency = '&euro;') {
     return number_format($amount, 2, ',', '&nbsp;').' '.$currency;
 }
@@ -19,16 +27,26 @@ function getProductPicture($picture = '') {
     return 'http://placehold.it/320x150';
 }
 
+
+function cutString($text, $max_length = 0, $end = '...', $sep = '[@]') {
+
+    if ($max_length > 0 && strlen($text) > $max_length) {
+        $text = wordwrap($text, $max_length, $sep);
+        $text = explode($sep, $text);
+        return $text[0].$end;
+    }
+
+    return $text;
+}
+
 function displayProduct($product) {
 
 	$product_id = $product['id'];
-    $category = $product['category'];
-    $name = ucfirst(substr($product['name'], 0, 15)).'...';
-    $description = substr($product['description'], 0, 100).'[...]';
+    $name = ucfirst(cutString($product['name'], 15));
+    $description = cutString($product['description'], 100, ' [...]');
     $price = formatAmount($product['price']);
     $picture = getProductPicture($product['picture']);
     $rating = $product['rating'];
-    $date = $product['date'];
 
     include 'partials/product-thumbnail.php';
 }

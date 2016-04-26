@@ -1,6 +1,8 @@
 <?php
 require_once 'partials/header.php';
 
+sleep(2);
+
 $query = $db->query('SELECT * FROM products ORDER BY date DESC LIMIT 6');
 $last_products = $query->fetchAll();
 //debug($last_products);

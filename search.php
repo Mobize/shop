@@ -1,5 +1,23 @@
-<?php require_once 'partials/header.php' ?>
+<?php
+require_once 'partials/header.php';
 
+//debug($_GET);
+
+$search = !empty($_GET['q']) ? strip_tags($_GET['q']) : '';
+
+$count_results = 0;
+$search_results = array();
+
+if (!empty($search)) {
+    $query = $db->prepare('SELECT * FROM products WHERE name LIKE :search OR description LIKE :search');
+    $query->bindValue(':search', '%'.$search.'%', PDO::PARAM_STR);
+    $query->execute();
+    $search_results = $query->fetchAll();
+    //$count_results = count($search_results);
+    $count_results = $query->rowCount();
+}
+
+?>
 		<div class="row">
 
 			<div class="col-lg-12">
@@ -21,7 +39,10 @@
 
 				<h1 class="page-header">Filters</h1>
 
-				<form class="search form-inline" method="GET">
+				<form action="search.php" class="search form-inline" method="GET">
+
+                    <input type="hidden" name="q" value="<?= $search ?>" />
+
 					<div class="form-group">
 						<select id="category" name="category" class="form-control">
 							<option value="">Category</option>
@@ -48,113 +69,28 @@
 
 			</div><!-- /.col-lg-12 -->
 
+            <?php
+            if (!empty($search)):
+            ?>
+
 			<hr>
 
 			<div class="col-lg-12">
-				<h1 class="page-header">X search results</h1>
+				<h1 class="page-header"><?= $count_results ?> search results for "<?= $search ?>"</h1>
 			</div>
 
+            <?php
+                foreach($search_results as $key => $product):
+            ?>
 			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-				<div class="thumbnail">
-					<img src="http://placehold.it/320x150" alt="">
-					<div class="caption">
-						<h4 class="pull-right">64.99 €</h4>
-						<h4><a href="#">Second Product</a>
-						</h4>
-						<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-					<div class="ratings">
-						<p class="pull-right">12 reviews</p>
-						<p>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star-empty"></span>
-						</p>
-					</div>
-					<div class="btns clearfix">
-						<a class="btn btn-info pull-left" href="product.php"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-						<a class="btn btn-primary pull-right" href=""><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-				<div class="thumbnail">
-					<img src="http://placehold.it/320x150" alt="">
-					<div class="caption">
-						<h4 class="pull-right">64.99 €</h4>
-						<h4><a href="#">Second Product</a>
-						</h4>
-						<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-					<div class="ratings">
-						<p class="pull-right">12 reviews</p>
-						<p>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star-empty"></span>
-						</p>
-					</div>
-					<div class="btns clearfix">
-						<a class="btn btn-info pull-left" href="product.php"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-						<a class="btn btn-primary pull-right" href=""><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-				<div class="thumbnail">
-					<img src="http://placehold.it/320x150" alt="">
-					<div class="caption">
-						<h4 class="pull-right">64.99 €</h4>
-						<h4><a href="#">Second Product</a>
-						</h4>
-						<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-					<div class="ratings">
-						<p class="pull-right">12 reviews</p>
-						<p>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star-empty"></span>
-						</p>
-					</div>
-					<div class="btns clearfix">
-						<a class="btn btn-info pull-left" href="product.php"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-						<a class="btn btn-primary pull-right" href=""><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-				<div class="thumbnail">
-					<img src="http://placehold.it/320x150" alt="">
-					<div class="caption">
-						<h4 class="pull-right">64.99 €</h4>
-						<h4><a href="#">Second Product</a>
-						</h4>
-						<p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-					<div class="ratings">
-						<p class="pull-right">12 reviews</p>
-						<p>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star-empty"></span>
-						</p>
-					</div>
-					<div class="btns clearfix">
-						<a class="btn btn-info pull-left" href="product.php"><span class="glyphicon glyphicon-eye-open"></span> View</a>
-						<a class="btn btn-primary pull-right" href=""><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a>
-					</div>
-				</div>
-			</div>
+                <?= displayProduct($product) ?>
+            </div>
+            <?php
+                endforeach;
 
-		</div>
+            endif;
+            ?>
+
+        </div>
 
 <?php require_once 'partials/footer.php' ?>
