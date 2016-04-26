@@ -55,6 +55,13 @@ Products
 }
 
 /*
+Search
+*/
+form.search .form-group {
+    margin-right: 10px;
+}
+
+/*
 Footer
 */
 
@@ -184,4 +191,75 @@ Footer
 .payments {
     width: 150px;
     font-size: 1.5em;
+}
+
+/*
+Cart Dropdown
+*/
+
+ul.dropdown-cart{
+    min-width: 300px;
+    cursor: pointer;
+}
+ul.dropdown-cart li .item{
+    display:block;
+    padding:3px 10px;
+    margin: 3px 0;
+}
+
+ul.dropdown-cart li:nth-child(odd) .item {
+    background-color: #FFFFFF;
+}
+
+ul.dropdown-cart li:nth-child(even) .item {
+    background-color: #EEEEEE;
+}
+
+ul.dropdown-cart li .item:hover{
+    background-color: #CCC;
+}
+ul.dropdown-cart li .item:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+ul.dropdown-cart li .item-left{
+    float:left;
+}
+ul.dropdown-cart li .item-left img {
+    width: 50px;
+}
+ul.dropdown-cart li .item-left img,
+ul.dropdown-cart li .item-left span.item-info{
+    float:left;
+}
+ul.dropdown-cart li .item-left span.item-info{
+    margin-left:10px;
+    width: auto;
+}
+ul.dropdown-cart li .item-left span.item-info span{
+    display:block;
+}
+ul.dropdown-cart li .item-right{
+    float:right;
+}
+ul.dropdown-cart li .item-right button{
+    margin-top: 7px;
+}
+
+span.badge {
+    display: inline !important;
+}
+
+/*
+Cart Summary
+*/
+
+#cart-products .media > .pull-left {
+    padding-right: 0;
+    margin-right: 10px;
 }
