@@ -26,7 +26,7 @@ if (!empty($search)) {
 
 				<form class="form-horizontal" method="GET">
 					<div class="input-group">
-						<input type="text" name="q" class="form-control" placeholder="Search...">
+						<input type="text" name="q" class="form-control" placeholder="Search..." value="<?= $search ?>">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit"><span class=" glyphicon glyphicon-search"></span></button>
 						</span>
