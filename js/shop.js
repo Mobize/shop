@@ -27,6 +27,9 @@
 	},
 
 	getCart: function() {
+
+		//$('#cart-products').load('ajax-cart-products.php');
+
 		$.ajax({
 			method: 'POST',
 			url: 'ajax-cart-products.php'
